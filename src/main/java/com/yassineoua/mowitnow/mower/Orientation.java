@@ -1,4 +1,4 @@
-package com.yassineoua.mowitnow;
+package com.yassineoua.mowitnow.mower;
 
 public enum Orientation {
     N,

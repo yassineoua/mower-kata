@@ -1,4 +1,4 @@
-package com.yassineoua.mowitnow;
+package com.yassineoua.mowitnow.mower;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -25,6 +25,13 @@ class PositionTest {
         assertCoordinates(expectedX, expectedY, position);
     }
 
+    @Test
+    void shouldThrowExceptionWhenTranslateXResultIsNegative() {
+        Assertions.assertThrowsExactly(IllegalStateException.class, () -> {
+            new Position(1, 1, Orientation.N).translateX(-2);
+        });
+    }
+
     @ParameterizedTest(name = "from (2, 2) to ({0}, {1}) when dx = {2}")
     @CsvSource({"2, 3, 1", "2, 1, -1", "2, 2, 0"})
     void testNewPositionWhenTranslateY(int expectedX, int expectedY, int dy) {
@@ -33,6 +40,13 @@ class PositionTest {
         position.translateY(dy);
 
         assertCoordinates(expectedX, expectedY, position);
+    }
+
+    @Test
+    void shouldThrowExceptionWhenTranslateYResultIsNegative() {
+        Assertions.assertThrowsExactly(IllegalStateException.class, () -> {
+            new Position(1, 1, Orientation.N).translateY(-2);
+        });
     }
 
     @Test

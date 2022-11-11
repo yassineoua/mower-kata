@@ -1,4 +1,4 @@
-package com.yassineoua.mowitnow;
+package com.yassineoua.mowitnow.mower;
 
 import lombok.Getter;
 
@@ -26,10 +26,16 @@ public class Position {
     }
 
     public void translateX(int dx) {
+        if((x + dx) < 0) {
+            throw new IllegalStateException("invalid operation");
+        }
         this.x += dx;
     }
 
     public void translateY(int dy) {
+        if((y + dy) < 0) {
+            throw new IllegalStateException("invalid operation");
+        }
         this.y += dy;
     }
 

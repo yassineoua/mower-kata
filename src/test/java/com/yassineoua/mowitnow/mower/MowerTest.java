@@ -1,4 +1,4 @@
-package com.yassineoua.mowitnow;
+package com.yassineoua.mowitnow.mower;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

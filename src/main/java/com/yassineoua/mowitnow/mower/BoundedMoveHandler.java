@@ -10,7 +10,7 @@ public class BoundedMoveHandler implements MoveHandler {
     private int maxY;
 
     @Override
-    public void move(Mower mower, MoveAction action) {
+    public void move(IMower mower, MoveAction action) {
         switch (action) {
             case MOVE_FORWARD:
                 moveForward(mower);
@@ -24,7 +24,7 @@ public class BoundedMoveHandler implements MoveHandler {
         }
     }
 
-    private void moveForward(Mower mower) {
+    private void moveForward(IMower mower) {
         if (mower.getOrientation() == Orientation.W && mower.getX() > 0) {
             mower.moveForward();
         } else if (mower.getOrientation() == Orientation.E && mower.getX() < maxX) {

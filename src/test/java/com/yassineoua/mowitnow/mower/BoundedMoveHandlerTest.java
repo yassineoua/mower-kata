@@ -1,5 +1,6 @@
 package com.yassineoua.mowitnow.mower;
 
+import com.yassineoua.mowitnow.helpers.MowerTestHelper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,7 +14,7 @@ public class BoundedMoveHandlerTest {
     @Test
     void shouldMoveForwardWhenPositionIsInsideArea() {
         BoundedMoveHandler moveHandler = new BoundedMoveHandler(5, 5);
-        Mower mower = createMowerMock(new Position(2, 3, Orientation.N));
+        IMower mower = MowerTestHelper.createMowerMock(2, 3, Orientation.N);
 
         moveHandler.move(mower, MoveAction.MOVE_FORWARD);
 
@@ -26,7 +27,7 @@ public class BoundedMoveHandlerTest {
     @CsvSource({"0,2,W", "5,5,E", "2,0,S", "5,5,N"})
     void shouldNotMoveForwardWhenPositionIsOutsideArea(int x, int y, String orientation) {
         BoundedMoveHandler moveHandler = new BoundedMoveHandler(5, 5);
-        Mower mower = createMowerMock(new Position(x, y, Orientation.valueOf(orientation)));
+        IMower mower = MowerTestHelper.createMowerMock(x, y, Orientation.valueOf(orientation));
 
         moveHandler.move(mower, MoveAction.MOVE_FORWARD);
 
@@ -36,7 +37,7 @@ public class BoundedMoveHandlerTest {
     @Test
     void testTurnLeft() {
         BoundedMoveHandler moveHandler = new BoundedMoveHandler(5, 5);
-        Mower mower = createMowerMock(new Position(2, 2, Orientation.N));
+        IMower mower = MowerTestHelper.createMowerMock(2, 2, Orientation.N);
 
         moveHandler.move(mower, MoveAction.TURN_LEFT);
 
@@ -46,21 +47,11 @@ public class BoundedMoveHandlerTest {
     @Test
     void testTurnRight() {
         BoundedMoveHandler moveHandler = new BoundedMoveHandler(5, 5);
-        Mower mower = createMowerMock(new Position(2, 2, Orientation.N));
+        IMower mower = MowerTestHelper.createMowerMock(2, 2, Orientation.N);
 
         moveHandler.move(mower, MoveAction.TURN_RIGHT);
 
         verify(mower, times(1)).turnRight();
-    }
-
-    private Mower createMowerMock(Position position) {
-        Mower mower = mock(Mower.class);
-
-        when(mower.getX()).thenReturn(position.getX());
-        when(mower.getY()).thenReturn(position.getY());
-        when(mower.getOrientation()).thenReturn(position.getOrientation());
-
-        return mower;
     }
 
 }

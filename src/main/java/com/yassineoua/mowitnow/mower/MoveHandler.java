@@ -1,6 +1,6 @@
 package com.yassineoua.mowitnow.mower;
 
-public interface MowerMoveController {
+public interface MoveHandler {
 
     void move(Mower mower, MoveAction action);
 }

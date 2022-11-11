@@ -4,7 +4,7 @@ import lombok.Getter;
 
 import java.util.Objects;
 
-public class Position {
+public class Position implements Cloneable {
 
     @Getter
     private int x;
@@ -26,14 +26,14 @@ public class Position {
     }
 
     public void translateX(int dx) {
-        if((x + dx) < 0) {
+        if ((x + dx) < 0) {
             throw new IllegalStateException("invalid operation");
         }
         this.x += dx;
     }
 
     public void translateY(int dy) {
-        if((y + dy) < 0) {
+        if ((y + dy) < 0) {
             throw new IllegalStateException("invalid operation");
         }
         this.y += dy;
@@ -44,6 +44,11 @@ public class Position {
             throw new IllegalArgumentException("orientation should be not null");
         }
         this.orientation = orientation;
+    }
+
+    @Override
+    public Position clone() {
+        return new Position(x, y, orientation);
     }
 
 }

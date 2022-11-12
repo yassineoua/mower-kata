@@ -12,4 +12,8 @@ public class MowerWithMoveActions {
     private Mower mower;
 
     private MoveActions moveActions;
+
+    boolean hasFinished() {
+        return !moveActions.hasNext();
+    }
 }

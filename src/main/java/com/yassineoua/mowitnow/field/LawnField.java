@@ -5,20 +5,16 @@ import com.yassineoua.mowitnow.utils.PreconditionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class LawnField {
-
-    private int maxX;
-    private int maxY;
 
     private List<MowerWithMoveActions> mowerWithMoveActions;
 
     private MoveHandler moveHandler;
 
     public LawnField(int maxX, int maxY) {
-        this.maxX = maxX;
-        this.maxY = maxY;
         this.mowerWithMoveActions = new ArrayList<>();
         this.moveHandler = new BoundedMoveHandler(maxX, maxY);
     }
@@ -28,13 +24,16 @@ public class LawnField {
     }
 
     public void mow() {
-        mowerWithMoveActions.forEach((mowerWithMoveActions) -> {
-            var mower = mowerWithMoveActions.getMower();
-            var moveActions = mowerWithMoveActions.getMoveActions();
-            while (moveActions.hasNext()) {
-                moveHandler.move(mower, moveActions.next());
-            }
-        });
+        mowerWithMoveActions
+                .stream()
+                .filter(Predicate.not(MowerWithMoveActions::hasFinished))
+                .forEach((mowerWithMoveActions) -> {
+                    var mower = mowerWithMoveActions.getMower();
+                    var moveActions = mowerWithMoveActions.getMoveActions();
+                    while (moveActions.hasNext()) {
+                        moveHandler.move(mower, moveActions.next());
+                    }
+                });
     }
 
     public void addMower(Position position, MoveActions moveActions) {
@@ -49,5 +48,6 @@ public class LawnField {
                 .map(ImmutableMower::of)
                 .collect(Collectors.toUnmodifiableList());
     }
+
 
 }

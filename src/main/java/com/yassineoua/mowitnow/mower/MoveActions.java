@@ -1,5 +1,7 @@
 package com.yassineoua.mowitnow.mower;
 
+import com.yassineoua.mowitnow.exceptions.InvalidMoveOrderException;
+
 import java.util.ArrayDeque;
 import java.util.Queue;
 
@@ -29,7 +31,7 @@ public class MoveActions {
             case 'D':
                 return MoveAction.TURN_RIGHT;
             default:
-                throw new IllegalArgumentException("Invalid move action '" + c + "'");
+                throw new InvalidMoveOrderException(c);
         }
     }
 

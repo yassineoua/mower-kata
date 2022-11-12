@@ -1,8 +1,8 @@
 package com.yassineoua.mowitnow.mower;
 
+import com.yassineoua.mowitnow.exceptions.BadCoordinatesException;
+import com.yassineoua.mowitnow.utils.PreconditionUtils;
 import lombok.Getter;
-
-import java.util.Objects;
 
 public class Position implements Cloneable {
 
@@ -17,9 +17,12 @@ public class Position implements Cloneable {
 
 
     public Position(int x, int y, Orientation orientation) {
+        PreconditionUtils.requiredArgument(orientation, "orientation must be not null");
+
         if (x < 0 || y < 0) {
-            throw new IllegalArgumentException("coordinates must be positive");
+            throw new BadCoordinatesException(x, y);
         }
+
         this.x = x;
         this.y = y;
         this.orientation = orientation;
@@ -27,28 +30,27 @@ public class Position implements Cloneable {
 
     public void translateX(int dx) {
         if ((x + dx) < 0) {
-            throw new IllegalStateException("invalid operation");
+            throwIllegalOperation();
+            return;
         }
         this.x += dx;
     }
 
+
     public void translateY(int dy) {
         if ((y + dy) < 0) {
-            throw new IllegalStateException("invalid operation");
+            throwIllegalOperation();
         }
         this.y += dy;
     }
 
-    public void orient(Orientation orientation) {
-        if (Objects.isNull(orientation)) {
-            throw new IllegalArgumentException("orientation should be not null");
-        }
-        this.orientation = orientation;
+    private void throwIllegalOperation() {
+        throw new IllegalStateException("invalid translation");
     }
 
-    @Override
-    public Position clone() {
-        return new Position(x, y, orientation);
+    public void orient(Orientation orientation) {
+        PreconditionUtils.requiredArgument(orientation, "orientation should be not null");
+        this.orientation = orientation;
     }
 
 }

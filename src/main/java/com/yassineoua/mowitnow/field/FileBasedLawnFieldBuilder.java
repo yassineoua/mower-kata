@@ -15,7 +15,7 @@ public class FileBasedLawnFieldBuilder implements LawnFieldBuilder {
     private String filename;
 
     public FileBasedLawnFieldBuilder(String filename) {
-        PreconditionUtils.checkNotNull(filename, "filename must be not null");
+        PreconditionUtils.requiredArgument(filename, "filename must be not null");
         this.filename = filename;
     }
 

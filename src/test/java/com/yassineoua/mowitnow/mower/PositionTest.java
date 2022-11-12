@@ -1,5 +1,6 @@
 package com.yassineoua.mowitnow.mower;
 
+import com.yassineoua.mowitnow.exceptions.BadCoordinatesException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -10,8 +11,15 @@ class PositionTest {
     @ParameterizedTest(name = "throw exception when x = {0} and y = {1} ")
     @CsvSource({"-1, 2", "3, -4", "-5, -5"})
     void shouldThrowExceptionWhenCoordinatesAreNegatives(int x, int y) {
-        Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
+        Assertions.assertThrowsExactly(BadCoordinatesException.class, () -> {
             new Position(x, y, Orientation.N);
+        });
+    }
+
+    @Test
+    void shouldThrowExceptionWhenOrientationIsNull() {
+        Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
+            new Position(2, 6, null);
         });
     }
 
@@ -50,7 +58,7 @@ class PositionTest {
     }
 
     @Test
-    void shouldThrowExceptionWhenOrientationIsNull() {
+    void shouldThrowExceptionWhenOrientCalledWithNullValue() {
         Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
             new Position(3, 5, Orientation.N)
                     .orient(null);

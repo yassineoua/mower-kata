@@ -1,5 +1,6 @@
 package com.yassineoua.mowitnow.mower;
 
+import com.yassineoua.mowitnow.exceptions.InvalidMoveOrderException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +36,7 @@ public class MoveActionsTest {
 
     @Test
     void shouldThrowExceptionWhenMoveActionIsNotValid() {
-        Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
+        Assertions.assertThrowsExactly(InvalidMoveOrderException.class, () -> {
             MoveActions.of("AAGADAAXD");
         });
     }

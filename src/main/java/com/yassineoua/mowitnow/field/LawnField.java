@@ -37,8 +37,8 @@ public class LawnField {
     }
 
     public void addMower(Position position, MoveActions moveActions) {
-        PreconditionUtils.checkNotNull(position, "position must be not null");
-        PreconditionUtils.checkNotNull(moveActions, "moveActions must be not null");
+        PreconditionUtils.requiredArgument(position, "position must be not null");
+        PreconditionUtils.requiredArgument(moveActions, "moveActions must be not null");
         mowerWithMoveActions.add(new MowerWithMoveActions(new Mower(position), moveActions));
     }
 

@@ -14,7 +14,7 @@ public class FileBasedLawnFieldBuilder implements LawnFieldBuilder {
     private static final String SEPARATOR = " ";
     private String filename;
 
-    FileBasedLawnFieldBuilder(String filename) {
+    public FileBasedLawnFieldBuilder(String filename) {
         PreconditionUtils.checkNotNull(filename, "filename must be not null");
         this.filename = filename;
     }

@@ -1,6 +1,6 @@
 package com.yassineoua.mowitnow.mower;
 
-import com.yassineoua.mowitnow.exceptions.InvalidMoveOrderException;
+import com.yassineoua.mowitnow.exceptions.InvalidMoveActionException;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
@@ -31,7 +31,7 @@ public class MoveActions {
             case 'D':
                 return MoveAction.TURN_RIGHT;
             default:
-                throw new InvalidMoveOrderException(c);
+                throw new InvalidMoveActionException(c);
         }
     }
 

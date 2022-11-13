@@ -1,10 +1,11 @@
 package com.yassineoua.mowitnow.mower;
 
 import com.yassineoua.mowitnow.exceptions.BadCoordinatesException;
+import com.yassineoua.mowitnow.exceptions.IllegalMoveException;
 import com.yassineoua.mowitnow.utils.PreconditionUtils;
 import lombok.Getter;
 
-public class Position implements Cloneable {
+public class Position {
 
     @Getter
     private int x;
@@ -29,23 +30,25 @@ public class Position implements Cloneable {
     }
 
     public void translateX(int dx) {
-        if ((x + dx) < 0) {
-            throwIllegalOperation();
+        int x = this.x + dx;
+        if (x < 0) {
+            throwIllegalMove(x, this.y);
             return;
         }
-        this.x += dx;
+        this.x = x;
     }
 
 
     public void translateY(int dy) {
-        if ((y + dy) < 0) {
-            throwIllegalOperation();
+        int y = this.y + dy;
+        if (y < 0) {
+            throwIllegalMove(this.x, y);
         }
-        this.y += dy;
+        this.y = y;
     }
 
-    private void throwIllegalOperation() {
-        throw new IllegalStateException("invalid translation");
+    private void throwIllegalMove(int x, int y) {
+        throw new IllegalMoveException(x, y);
     }
 
     public void orient(Orientation orientation) {

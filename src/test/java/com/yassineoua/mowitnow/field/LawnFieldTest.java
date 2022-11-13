@@ -42,4 +42,18 @@ public class LawnFieldTest {
         Assertions.assertEquals(1, lawnField.getMowers().size());
         Assertions.assertEquals("1 3 N", lawnField.getMowers().get(0).toString());
     }
+
+
+    @Test
+    void shouldIgnoreItWhenAddMowersOnTheSamePosition() {
+        LawnField lawnField = new LawnField(5, 5);
+
+        lawnField.addMower(new Position(1, 2, Orientation.N), MoveActions.of("GAGAGAGAA"));
+        lawnField.addMower(new Position(1, 2, Orientation.N), MoveActions.of("GAGAGAGAA"));
+
+        lawnField.mow();
+
+        Assertions.assertEquals(1, lawnField.getMowers().size());
+        Assertions.assertEquals("1 3 N", lawnField.getMowers().get(0).toString());
+    }
 }

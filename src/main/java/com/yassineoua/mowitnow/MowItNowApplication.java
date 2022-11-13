@@ -1,6 +1,6 @@
 package com.yassineoua.mowitnow;
 
-import com.yassineoua.mowitnow.field.FileBasedLawnFieldBuilder;
+import com.yassineoua.mowitnow.field.FileLawnFieldReader;
 import com.yassineoua.mowitnow.field.LawnField;
 
 import java.util.Objects;
@@ -13,7 +13,7 @@ public class MowItNowApplication {
             throw new IllegalArgumentException("file name is required");
         }
 
-        LawnField lawnField = new FileBasedLawnFieldBuilder(args[0]).build();
+        LawnField lawnField = new FileLawnFieldReader(args[0]).read();
 
         lawnField.mow();
 

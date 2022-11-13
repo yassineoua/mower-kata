@@ -9,20 +9,20 @@ import com.yassineoua.mowitnow.utils.PreconditionUtils;
 import java.io.*;
 import java.net.URL;
 
-public class FileBasedLawnFieldBuilder implements LawnFieldBuilder {
+public class FileLawnFieldReader implements LawnFieldReader {
 
     private static final String SEPARATOR = " ";
     private String filename;
 
-    public FileBasedLawnFieldBuilder(String filename) {
+    public FileLawnFieldReader(String filename) {
         PreconditionUtils.requiredArgument(filename, "filename must be not null");
         this.filename = filename;
     }
 
     @Override
-    public LawnField build() {
+    public LawnField read() {
         String line = readLine();
-        if(line == null || line.isBlank() || line.isEmpty()) {
+        if (line == null || line.isBlank() || line.isEmpty()) {
             throw new MowItNowException("file is empty");
         }
         return createLawnFieldFromString(line);

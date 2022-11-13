@@ -8,28 +8,28 @@ import java.io.FileNotFoundException;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class FileBasedLawnFieldBuilderTest {
+public class FileLawnFieldReaderTest {
 
     @Test
     void shouldThrowExceptionWhenFileIsNotExists() {
-        FileBasedLawnFieldBuilder builder = new FileBasedLawnFieldBuilder("not-exists.txt");
+        FileLawnFieldReader reader = new FileLawnFieldReader("not-exists.txt");
 
-        MowItNowException exception = Assertions.assertThrowsExactly(MowItNowException.class, builder::build);
+        MowItNowException exception = Assertions.assertThrowsExactly(MowItNowException.class, reader::read);
         Assertions.assertInstanceOf(FileNotFoundException.class, exception.getCause());
     }
 
     @Test
     void shouldThrowExceptionWhenFileIsEmpty() {
-        FileBasedLawnFieldBuilder builder = new FileBasedLawnFieldBuilder("empty-file.txt");
+        FileLawnFieldReader reader = new FileLawnFieldReader("empty-file.txt");
 
-        Assertions.assertThrowsExactly(MowItNowException.class, builder::build);
+        Assertions.assertThrowsExactly(MowItNowException.class, reader::read);
     }
 
     @Test
     void testCreateLawnField() {
-        FileBasedLawnFieldBuilder builder = new FileBasedLawnFieldBuilder("field.txt");
+        FileLawnFieldReader reader = new FileLawnFieldReader("field.txt");
 
-        LawnField lawnField = builder.build();
+        LawnField lawnField = reader.read();
 
         lawnField.mow();
 

@@ -39,7 +39,11 @@ public class LawnField {
     public void addMower(Position position, MoveActions moveActions) {
         PreconditionUtils.requiredArgument(position, "position must be not null");
         PreconditionUtils.requiredArgument(moveActions, "moveActions must be not null");
-        mowerWithMoveActions.add(new MowerWithMoveActions(new Mower(position), moveActions));
+        Mower mower = new Mower(position);
+        boolean exists = mowerWithMoveActions.stream().anyMatch(item -> mower.equals(item.getMower()));
+        if (!exists) {
+            mowerWithMoveActions.add(new MowerWithMoveActions(new Mower(position), moveActions));
+        }
     }
 
     public List<IMower> getMowers() {

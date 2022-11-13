@@ -1,6 +1,7 @@
 package com.yassineoua.mowitnow.mower;
 
 import com.yassineoua.mowitnow.exceptions.BadCoordinatesException;
+import com.yassineoua.mowitnow.exceptions.IllegalMoveException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -35,7 +36,7 @@ class PositionTest {
 
     @Test
     void shouldThrowExceptionWhenTranslateXResultIsNegative() {
-        Assertions.assertThrowsExactly(IllegalStateException.class, () -> {
+        Assertions.assertThrowsExactly(IllegalMoveException.class, () -> {
             new Position(1, 1, Orientation.N).translateX(-2);
         });
     }
@@ -52,7 +53,7 @@ class PositionTest {
 
     @Test
     void shouldThrowExceptionWhenTranslateYResultIsNegative() {
-        Assertions.assertThrowsExactly(IllegalStateException.class, () -> {
+        Assertions.assertThrowsExactly(IllegalMoveException.class, () -> {
             new Position(1, 1, Orientation.N).translateY(-2);
         });
     }

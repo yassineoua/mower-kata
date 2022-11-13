@@ -47,4 +47,20 @@ class MowerTest {
         Assertions.assertEquals(expectedX, mower.getX());
         Assertions.assertEquals(expectedY, mower.getY());
     }
+
+    @Test
+    void testMowerEquals() {
+        Mower mower1 = new Mower(new Position(1, 4, Orientation.N));
+        Mower mower2 = new Mower(new Position(1, 4, Orientation.N));
+
+        Assertions.assertEquals(mower1, mower2);
+    }
+
+    @Test
+    void testMowerNotEquals() {
+        Mower mower1 = new Mower(new Position(1, 4, Orientation.N));
+        Mower mower2 = new Mower(new Position(3, 2, Orientation.N));
+
+        Assertions.assertNotEquals(mower1, mower2);
+    }
 }
